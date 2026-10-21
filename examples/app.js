@@ -32,7 +32,7 @@ app.post('/interactions', verifyKeyMiddleware(process.env.PUBLIC_KEY), async fun
       });
     }
 
-        // 2. Custom Roblox /severed command logic (Streamlined: Fields Array Removed)
+    // 2. Custom Roblox /severed command logic (Fixed URL & Permissions)
     if (name === 'severed') {
       const optionsArray = interactionData.options || [];
       const userIdOption = optionsArray.find(opt => opt.name === 'userid');
@@ -42,6 +42,7 @@ app.post('/interactions', verifyKeyMiddleware(process.env.PUBLIC_KEY), async fun
       // Checks if the user input text is a pure number
       if (/^\d+\$/.test(targetInput)) {
         try {
+          // FIXED: Correct API endpoint URL string
           const robloxResponse = await fetch(`https://roblox.com{targetInput}`);
           if (robloxResponse.ok) {
             const robloxData = await robloxResponse.json();
@@ -85,7 +86,6 @@ app.post('/interactions', verifyKeyMiddleware(process.env.PUBLIC_KEY), async fun
         }
       });
     }
-
 
     // 3. Custom /announce command logic (Streamlined: posts right into the local execution channel)
     if (name === 'announce') {

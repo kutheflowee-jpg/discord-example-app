@@ -3,8 +3,6 @@ import { DiscordRequest } from '../utils.js';
 
 async function installCommand(commandBody) {
   const appId = process.env.APP_ID;
-  
-  // FIXED: Changed endpoint layout from guild-specific to global application-wide scoping!
   const globalEndpoint = `applications/${appId}/commands`;
 
   try {
@@ -32,6 +30,7 @@ async function registerAll() {
     name: 'severed',
     description: 'Log a Roblox moderation action layout',
     type: 1,
+    default_member_permissions: "8", // FIXED: Blocks anyone who isn't a server Admin!
     options: [
       {
         type: 3,
@@ -46,6 +45,7 @@ async function registerAll() {
     name: 'announce',
     description: 'Send a clean block embed announcement message',
     type: 1,
+    default_member_permissions: "8", // FIXED: Blocks anyone who isn't a server Admin!
     options: [
       {
         type: 3,
